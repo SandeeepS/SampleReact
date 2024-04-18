@@ -8,16 +8,30 @@ import { MdDelete } from "react-icons/md";
 function Todo() {
   const [todo, setTodo] = useState("");
   const [todos, setTodos] = useState([]);
+  const [editid,setEditId] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
-  const addTodo = () => {
-    setTodos([...todos, {list:todo,id : Date.now(),status : false}]);
-    console.log(todos);
-    setTodo("");
-  };
+const addTodo = () => {
+    if(todo !== ''){
+        if(editid){
+            const updatedTodos = todos.map((todoItem) => {
+                if (todoItem.id === editid) {
+                  return { ...todoItem, list: todo, status: todoItem.status };
+                }
+                return todoItem;
+              });
+              setTodos(updatedTodos);
+              setEditId(0); 
+        }else{
+            setTodos([{ list: todo, id: Date.now(), status: false }, ...todos]);
+
+        }
+        setTodo("");
+    }
+}
 
   const inputRef = useRef("null");
 
@@ -37,6 +51,13 @@ function Todo() {
         return list
     })
     setTodos(complete)
+
+ }
+
+ const onEdit = (id)=>{
+    const editedList = todos.find((list) => list.id === id)
+    setTodo(editedList.list)
+    setEditId(editedList.id)
  }
 
   return (
@@ -52,7 +73,7 @@ function Todo() {
           onChange={(event) => setTodo(event.target.value)}
         />
 
-        <button onClick={addTodo}>ADD</button>
+        <button onClick={addTodo}>{editid ? 'EDIT' : 'ADD'}</button>
       </form>
 
       <div className="list">
@@ -67,7 +88,12 @@ function Todo() {
                   title="Complete"
                   onClick={()=> onComplete(todo.id)}
                 />
-                <FiEdit className="list-item-icons" id="edit" title="Edit" />
+                <FiEdit 
+                  className="list-item-icons" 
+                  id="edit" 
+                  title="Edit"
+                  onClick={()=> onEdit(todo.id)}
+                />
                 <MdDelete
                   className="list-item-icons"
                   id="delete"
