@@ -43,6 +43,7 @@ const addTodo = () => {
    setTodos( todos.filter((todo)=> todo.id !== id) )
  }
 
+ //function to mark completed task
  const onComplete = (id) => {
     let complete = todos.map((list)=>{
         if(list.id === id){
