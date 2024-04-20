@@ -39,6 +39,7 @@ const addTodo = () => {
     inputRef.current.focus();
   });
 
+  //function to delete the list
  const onDelete = (id) => {
    setTodos( todos.filter((todo)=> todo.id !== id) )
  }
