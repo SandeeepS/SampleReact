@@ -45,6 +45,7 @@ const addTodo = () => {
  }
 
 
+ //function to complete
  const onComplete = (id) => {
     let complete = todos.map((list)=>{
         if(list.id === id){
