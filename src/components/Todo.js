@@ -15,7 +15,13 @@ function Todo() {
   };
 
 const addTodo = () => {
-    if(todo !== ''){
+    if(todo === ' '){
+      setTimeout(()=>{
+        setTodo("Please enter a valid list")
+      },3000)
+       
+    }else{
+    
         if(editid){
             const updatedTodos = todos.map((todoItem) => {
                 if (todoItem.id === editid) {
@@ -69,17 +75,19 @@ const addTodo = () => {
       <form action="" className="form-group" onSubmit={handleSubmit}>
         <input
           type="text"
-          value={todo}
+         
           ref={inputRef}
           placeholder="Enter you todo"
           className="form-control"
           onChange={(event) => setTodo(event.target.value)}
         />
 
+
         <button onClick={addTodo}>{editid ? 'EDIT' : 'ADD'}</button>
       </form>
-
+     
       <div className="list">
+        <h4>{todo}</h4>
         <ul>
           {todos.map((todo) => (
             <li className="list-items">
