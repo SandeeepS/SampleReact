@@ -63,3 +63,9 @@ li{
     text-decoration: line-through;
     opacity: 0.3;
 }
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin: auto;
+    text-align: center;
+  }
