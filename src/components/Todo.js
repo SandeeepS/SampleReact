@@ -91,7 +91,7 @@ function Todo() {
           type="text"
           ref={inputRef}
           value={todo}
-          placeholder="Enter you todo"
+          placeholder="Enter your task"
           className="form-control"
           onChange={(event) => setTodo(event.target.value)}
         />
